@@ -205,7 +205,11 @@ namespace OpenKh.Egs
                     else
                     {
                         isNameUnknown = true;
-                        //continue;
+                        // FIX: the name is not in any list nor in the patch. Keep the entry untouched,
+                        // identified by its hash. ReplaceFile writes the MD5 from 'filename' when
+                        // isNameUnknown is true, so 'filename' must hold the hash (it was null before,
+                        // which made Path.Combine throw ArgumentNullException).
+                        filename = hash;
                     }
                 }
 
